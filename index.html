@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সাভার জরুরি ডিরেক্টরি | Savar Emergency Directory</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-red: #d9534f;
+            --police-blue: #004085;
+            --medical-red: #dc3545;
+            --ambulance-orange: #fd7e14;
+            --fire-red: #ff1744;
+            --bg-light: #f4f7f6;
+            --card-light: #ffffff;
+            --text-light: #333;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: var(--bg-light); 
+            margin: 0; 
+            padding: 15px; 
+            transition: 0.3s;
+        }
+
+        .container { 
+            max-width: 500px; 
+            margin: auto; 
+            background: var(--card-light); 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+
+        /* ডার্ক মোড */
+        .dark-mode { background-color: #121212; color: #e0e0e0; }
+        .dark-mode .container { background-color: #1e1e1e; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+        .dark-mode .contact-card { background-color: #2c2c2c; border-bottom: 1px solid #444; color: white; }
+        .dark-mode h3 { color: #fff; }
+        .dark-mode p { color: #bbb; }
+        .dark-mode input { background: #333; border-color: #555; color: white; }
+
+        h1 { color: var(--primary-red); margin-bottom: 5px; font-size: 22px; }
+        .subtitle { font-size: 14px; margin-bottom: 20px; color: #666; }
+
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .btn-small {
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .mode-btn { background: #34495e; color: white; }
+        .share-btn { background: #007bff; color: white; }
+
+        input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 20px; 
+            border: 2px solid #ddd; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .contact-card { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px; 
+            margin-bottom: 10px;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: left; 
+        }
+
+        .contact-info h3 { margin: 0; font-size: 17px; }
+        .contact-info p { margin: 5px 0 0; color: #666; font-size: 13px; }
+
+        .call-btn { 
+            background: #28a745; 
+            color: white !important; 
+            padding: 10px 15px; 
+            text-decoration: none; 
+            border-radius: 10px; 
+            font-weight: bold; 
+            font-size: 14px; 
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ক্যাটাগরি বর্ডার */
+        .police { border-left: 6px solid var(--police-blue); }
+        .medical { border-left: 6px solid var(--medical-red); }
+        .ambulance { border-left: 6px solid var(--ambulance-orange); }
+        .blood { border-left: 6px solid #880e4f; }
+        .fire { border-left: 6px solid var(--fire-red); }
+
+        footer { margin-top: 20px; font-size: 12px; color: #888; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="top-controls">
+        <button class="btn-small mode-btn" onclick="toggleMode()"><i class="fas fa-moon"></i> মোড</button>
+        <button class="btn-small share-btn" onclick="shareApp()"><i class="fas fa-share-alt"></i> শেয়ার করুন</button>
+    </div>
+    
+    <h1><i class="fas fa-phone-alt"></i> সাভার জরুরি ডিরেক্টরি</h1>
+    <p class="subtitle">সাভার, আশুলিয়া ও নবীনগর এলাকার গুরুত্বপূর্ণ নম্বর</p>
+    
+    <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="থানা বা হাসপাতালের নাম লিখুন...">
+
+    <div id="contactList">
+        <div class="contact-card police">
+            <div class="contact-info">
+                <h3>সাভার মডেল থানা</h3>
+                <p><i class="fas fa-user-shield"></i> ডিউটি অফিসার</p>
+            </div>
+            <a href="tel:01320045053" class="call-btn" onclick="return confirmCall('সাভার মডেল থানা')"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
+        <div class="contact-card police">
+            <div class="contact-info">
+                <h3>আশুলিয়া থানা</h3>
+                <p><i class="fas fa-user-shield"></i> ডিউটি অফিসার</p>
+            </div>
+            <a href="tel:01320045018" class="call-btn" onclick="return confirmCall('আশুলিয়া থানা')"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
+        <div class="contact-card medical">
+            <div class="contact-info">
+                <h3>এনাম মেডিকেল হাসপাতাল</h3>
+                <p><i class="fas fa-hospital"></i> সাভার (জরুরি বিভাগ)</p>
+            </div>
+            <a href="tel:01716358146" class="call-btn" onclick="return confirmCall('এনাম মেডিকেল')"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
+        <div class="contact-card fire">
+            <div class="contact-info">
+                <h3>সাভার ফায়ার সার্ভিস</h3>
+                <p><i class="fas fa-fire-extinguisher"></i> অগ্নি নির্বাপক ও উদ্ধার</p>
+            </div>
+            <a href="tel:01730002231" class="call-btn" onclick="return confirmCall('ফায়ার সার্ভিস')"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
+        <div class="contact-card medical" style="background: #fff9f9; border: 2px solid #d9534f;">
+            <div class="contact-info">
+                <h3 style="color: #d9534f;">জাতীয় জরুরি সেবা</h3>
+                <p>সবকিছুর জন্য এক নম্বর</p>
+            </div>
+            <a href="tel:999" class="call-btn" style="background: #d9534f;"><i class="fas fa-headset"></i> ৯৯৯</a>
+        </div>
+    </div>
+
+    <footer>স্বেচ্ছায় জনস্বার্থে তৈরিকৃত</footer>
+</div>
+
+<script>
+    // সার্চ ফাংশন
+    function searchFunction() {
+        let input = document.getElementById('searchInput').value.toUpperCase();
+        let cards = document.getElementsByClassName('contact-card');
+        for (let i = 0; i < cards.length; i++) {
+            let info = cards[i].innerText;
+            cards[i].style.display = info.toUpperCase().indexOf(input) > -1 ? "flex" : "none";
+        }
+    }
+
+    // নাইট মোড
+    function toggleMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+
+    // কল করার আগে নিশ্চিত করা
+    function confirmCall(name) {
+        return confirm(name + " নম্বরে কল করতে চান?");
+    }
+
+    // শেয়ার ফাংশন
+    function shareApp() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'সাভার জরুরি ডিরেক্টরি',
+                text: 'সাভার এলাকার সকল জরুরি নম্বর এখানে পাবেন।',
+                url: window.location.href
+            });
+        } else {
+            alert("আপনার ব্রাউজারে শেয়ার অপশন সাপোর্ট করছে না। লিঙ্কটি কপি করে শেয়ার করুন।");
+        }
+    }
+</script>
+
+</body>
+</html>
