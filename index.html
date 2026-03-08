@@ -14,9 +14,9 @@
             --medical-red: #dc3545;
             --ambulance-orange: #fd7e14;
             --fire-red: #ff1744;
+            --utility-green: #2c3e50;
             --bg-light: #f4f7f6;
             --card-light: #ffffff;
-            --text-light: #333;
         }
 
         body { 
@@ -28,7 +28,7 @@
         }
 
         .container { 
-            max-width: 500px; 
+            max-width: 550px; 
             margin: auto; 
             background: var(--card-light); 
             padding: 20px; 
@@ -36,82 +36,52 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
         }
 
-        /* ডার্ক মোড */
         .dark-mode { background-color: #121212; color: #e0e0e0; }
-        .dark-mode .container { background-color: #1e1e1e; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-        .dark-mode .contact-card { background-color: #2c2c2c; border-bottom: 1px solid #444; color: white; }
+        .dark-mode .container { background-color: #1e1e1e; }
+        .dark-mode .contact-card { background-color: #2c2c2c; color: white; border-bottom: 1px solid #444; }
         .dark-mode h3 { color: #fff; }
         .dark-mode p { color: #bbb; }
-        .dark-mode input { background: #333; border-color: #555; color: white; }
 
-        h1 { color: var(--primary-red); margin-bottom: 5px; font-size: 22px; }
-        .subtitle { font-size: 14px; margin-bottom: 20px; color: #666; }
+        h1 { color: var(--primary-red); margin-bottom: 5px; font-size: 22px; text-align: center; }
+        .subtitle { font-size: 14px; margin-bottom: 20px; color: #666; text-align: center; }
 
-        .top-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
-
-        .btn-small {
-            padding: 8px 12px;
-            border-radius: 10px;
-            border: none;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
+        .top-controls { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .btn-small { padding: 8px 12px; border-radius: 10px; border: none; cursor: pointer; font-size: 13px; font-weight: bold; }
         .mode-btn { background: #34495e; color: white; }
         .share-btn { background: #007bff; color: white; }
 
         input { 
-            width: 100%; 
-            padding: 12px; 
-            margin-bottom: 20px; 
-            border: 2px solid #ddd; 
-            border-radius: 12px; 
-            font-size: 16px; 
-            box-sizing: border-box;
-            outline: none;
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #ddd; 
+            border-radius: 12px; font-size: 16px; box-sizing: border-box; outline: none;
         }
 
         .contact-card { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            padding: 15px; 
-            margin-bottom: 10px;
-            border-radius: 12px;
-            background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            text-align: left; 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 15px; margin-bottom: 10px; border-radius: 12px;
+            background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        .contact-info h3 { margin: 0; font-size: 17px; }
-        .contact-info p { margin: 5px 0 0; color: #666; font-size: 13px; }
+        .contact-info h3 { margin: 0; font-size: 16px; }
+        .contact-info p { margin: 5px 0 0; color: #666; font-size: 12px; }
 
         .call-btn { 
-            background: #28a745; 
-            color: white !important; 
-            padding: 10px 15px; 
-            text-decoration: none; 
-            border-radius: 10px; 
-            font-weight: bold; 
-            font-size: 14px; 
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background: #28a745; color: white !important; padding: 8px 15px; 
+            text-decoration: none; border-radius: 10px; font-weight: bold; font-size: 14px;
+            display: flex; align-items: center; gap: 5px;
         }
 
-        /* ক্যাটাগরি বর্ডার */
+        /* Category Borders */
         .police { border-left: 6px solid var(--police-blue); }
         .medical { border-left: 6px solid var(--medical-red); }
         .ambulance { border-left: 6px solid var(--ambulance-orange); }
-        .blood { border-left: 6px solid #880e4f; }
         .fire { border-left: 6px solid var(--fire-red); }
+        .utility { border-left: 6px solid var(--utility-green); }
 
-        footer { margin-top: 20px; font-size: 12px; color: #888; }
+        /* Map Section */
+        .map-container { margin-top: 20px; border-radius: 15px; overflow: hidden; border: 2px solid #ddd; }
+        iframe { width: 100%; height: 250px; border: 0; }
+
+        footer { margin-top: 20px; font-size: 12px; color: #888; text-align: center; }
     </style>
 </head>
 <body>
@@ -119,15 +89,23 @@
 <div class="container">
     <div class="top-controls">
         <button class="btn-small mode-btn" onclick="toggleMode()"><i class="fas fa-moon"></i> মোড</button>
-        <button class="btn-small share-btn" onclick="shareApp()"><i class="fas fa-share-alt"></i> শেয়ার করুন</button>
+        <button class="btn-small share-btn" onclick="shareApp()"><i class="fas fa-share-alt"></i> শেয়ার</button>
     </div>
     
     <h1><i class="fas fa-phone-alt"></i> সাভার জরুরি ডিরেক্টরি</h1>
-    <p class="subtitle">সাভার, আশুলিয়া ও নবীনগর এলাকার গুরুত্বপূর্ণ নম্বর</p>
+    <p class="subtitle">সাভার, আশুলিয়া ও নবীনগর এলাকার গুরুত্বপূর্ণ নম্বর</p>
     
-    <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="থানা বা হাসপাতালের নাম লিখুন...">
+    <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="খুঁজুন (যেমন: হাসপাতাল, থানা বা বিদ্যুৎ)...">
 
     <div id="contactList">
+        <div class="contact-card medical" style="background: #fff9f9; border: 2px solid #d9534f;">
+            <div class="contact-info">
+                <h3 style="color: #d9534f;">জাতীয় জরুরি সেবা</h3>
+                <p>পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্স</p>
+            </div>
+            <a href="tel:999" class="call-btn" style="background: #d9534f;"><i class="fas fa-headset"></i> ৯৯৯</a>
+        </div>
+
         <div class="contact-card police">
             <div class="contact-info">
                 <h3>সাভার মডেল থানা</h3>
@@ -141,39 +119,67 @@
                 <h3>আশুলিয়া থানা</h3>
                 <p><i class="fas fa-user-shield"></i> ডিউটি অফিসার</p>
             </div>
-            <a href="tel:01320045018" class="call-btn" onclick="return confirmCall('আশুলিয়া থানা')"><i class="fas fa-phone"></i> কল</a>
+            <a href="tel:01320045018" class="call-btn" onclick="return confirmCall('আশুলিয়া থানা')"><i class="fas fa-phone"></i> কল</a>
         </div>
 
         <div class="contact-card medical">
             <div class="contact-info">
-                <h3>এনাম মেডিকেল হাসপাতাল</h3>
+                <h3>এনাম মেডিকেল কলেজ</h3>
                 <p><i class="fas fa-hospital"></i> সাভার (জরুরি বিভাগ)</p>
             </div>
             <a href="tel:01716358146" class="call-btn" onclick="return confirmCall('এনাম মেডিকেল')"><i class="fas fa-phone"></i> কল</a>
         </div>
 
+        <div class="contact-card medical">
+            <div class="contact-info">
+                <h3>সাভার উপজেলা স্বাস্থ্য কমপ্লেক্স</h3>
+                <p><i class="fas fa-hospital-user"></i> সরকারি হাসপাতাল</p>
+            </div>
+            <a href="tel:01711202869" class="call-btn" onclick="return confirmCall('সাভার উপজেলা স্বাস্থ্য কমপ্লেক্স')"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
         <div class="contact-card fire">
             <div class="contact-info">
                 <h3>সাভার ফায়ার সার্ভিস</h3>
-                <p><i class="fas fa-fire-extinguisher"></i> অগ্নি নির্বাপক ও উদ্ধার</p>
+                <p><i class="fas fa-fire-extinguisher"></i> ফায়ার ও উদ্ধার সেবা</p>
             </div>
-            <a href="tel:01730002231" class="call-btn" onclick="return confirmCall('ফায়ার সার্ভিস')"><i class="fas fa-phone"></i> কল</a>
+            <a href="tel:01730002231" class="call-btn" onclick="return confirmCall('সাভার ফায়ার সার্ভিস')"><i class="fas fa-phone"></i> কল</a>
         </div>
 
-        <div class="contact-card medical" style="background: #fff9f9; border: 2px solid #d9534f;">
+        <div class="contact-card fire">
             <div class="contact-info">
-                <h3 style="color: #d9534f;">জাতীয় জরুরি সেবা</h3>
-                <p>সবকিছুর জন্য এক নম্বর</p>
+                <h3>ডিইপিজেড ফায়ার সার্ভিস</h3>
+                <p><i class="fas fa-fire-extinguisher"></i> আশুলিয়া এলাকা</p>
             </div>
-            <a href="tel:999" class="call-btn" style="background: #d9534f;"><i class="fas fa-headset"></i> ৯৯৯</a>
+            <a href="tel:01730002232" class="call-btn" onclick="return confirmCall('ডিইপিজেড ফায়ার সার্ভিস')"><i class="fas fa-phone"></i> কল</a>
         </div>
+
+        <div class="contact-card utility">
+            <div class="contact-info">
+                <h3>সাভার পল্লী বিদ্যুৎ-১</h3>
+                <p><i class="fas fa-bolt"></i> অভিযোগ ও অভিযোগ কেন্দ্র</p>
+            </div>
+            <a href="tel:01769400010" class="call-btn" style="background: #2c3e50;"><i class="fas fa-phone"></i> কল</a>
+        </div>
+
+        <div class="contact-card ambulance">
+            <div class="contact-info">
+                <h3>সাভার অ্যাম্বুলেন্স সেবা</h3>
+                <p><i class="fas fa-ambulance"></i> প্রাইভেট অ্যাম্বুলেন্স</p>
+            </div>
+            <a href="tel:01711340156" class="call-btn" style="background: #fd7e14;"><i class="fas fa-phone"></i> কল</a>
+        </div>
+    </div>
+
+    <h3 style="font-size: 16px; margin-top: 20px;"><i class="fas fa-map-marked-alt"></i> সাভার ম্যাপ</h3>
+    <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58368.106886494294!2d90.223842!3d23.858334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755ebd3d6df9569%3A0x277b3869d123d4a2!2sSavar!5e0!3m2!1sen!2sbd!4v1700000000000" allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <footer>স্বেচ্ছায় জনস্বার্থে তৈরিকৃত</footer>
 </div>
 
 <script>
-    // সার্চ ফাংশন
     function searchFunction() {
         let input = document.getElementById('searchInput').value.toUpperCase();
         let cards = document.getElementsByClassName('contact-card');
@@ -183,17 +189,14 @@
         }
     }
 
-    // নাইট মোড
     function toggleMode() {
         document.body.classList.toggle("dark-mode");
     }
 
-    // কল করার আগে নিশ্চিত করা
     function confirmCall(name) {
         return confirm(name + " নম্বরে কল করতে চান?");
     }
 
-    // শেয়ার ফাংশন
     function shareApp() {
         if (navigator.share) {
             navigator.share({
@@ -202,7 +205,7 @@
                 url: window.location.href
             });
         } else {
-            alert("আপনার ব্রাউজারে শেয়ার অপশন সাপোর্ট করছে না। লিঙ্কটি কপি করে শেয়ার করুন।");
+            alert("আপনার ব্রাউজারে শেয়ার অপশন সাপোর্ট করছে না। লিঙ্কটি কপি করে শেয়ার করুন।");
         }
     }
 </script>
